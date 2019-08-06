@@ -1,0 +1,38 @@
+@mixin grid {
+    display: grid
+}
+
+@function gridTemplateColumns($i) {
+    @return repeat(#{$i}, percentage(1 / $i))
+}
+
+@for $i from 1 through 12 {    
+    .g-row-sm-#{$i} {
+        @include grid;
+        @include sm {
+            grid-template-columns: gridTemplateColumns($i)
+        }
+    }
+
+    .g-row-md-#{$i} {
+        @include grid;
+        @include md {
+            grid-template-columns: gridTemplateColumns($i)        
+        }
+    }
+
+    .g-row-lg-#{$i} {
+        @include grid;
+        @include lg {
+            grid-template-columns: gridTemplateColumns($i)        
+        }
+    }
+
+    
+    @for $j from 1 through 30 {    
+        .g-col-#{$i}-#{$j} {
+            grid-column: #{$i} / #{$j};
+        }    
+    }
+}
+
